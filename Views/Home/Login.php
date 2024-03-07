@@ -1,3 +1,8 @@
+<?php 
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +11,11 @@
     <title>Login</title>
 </head>
 <body>
-    
+    <!-- login form html -->
+    <form action="../../Controllers/Login.php" method="post" novalidate>
+        <input type="text" name="username" placeholder="Username" >
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Login">
+    </form>
 </body>
 </html>
