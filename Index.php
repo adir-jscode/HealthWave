@@ -3,11 +3,11 @@ session_start();
 // navbar
 include 'Views/Home/Nav.php';
 
-if(isset($_SESSION['isLogged']) && $_SESSION['isLogged'] == true){
+// if(isset($_SESSION['is']) && $_SESSION['isLogged'] == true){
     
-}else{
-    header('Location: Views/Home/Login.php');
-}
+// }else{
+//     header('Location: Views/Home/Login.php');
+// }
 
 
 ?>

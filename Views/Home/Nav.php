@@ -8,10 +8,10 @@
         <a class="nav-link" href="#">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="./Views/Home/Registration.php">Register</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link" href="./Views/Home/Login.php">Login</a>
       </li>
       
     </ul>
