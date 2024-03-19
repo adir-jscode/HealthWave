@@ -18,7 +18,7 @@ session_start();
                     <fieldset style="width: 300px;">
                         <legend>Login</legend>
                         <label for="username">Username:</label><br>
-                        <input type="text" id="username" name="username" ><br><br>
+                        <input type="text" id="username" name="username" value=<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ""; ?> ><br><br>
                         <?php echo isset($_SESSION['usernameErrorMsg']) ? $_SESSION['usernameErrorMsg'] : ""; ?> <br>
                         <label for="password">Password:</label><br>
                         <input type="password" id="password" name="password" ><br><br>
