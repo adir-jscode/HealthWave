@@ -38,6 +38,12 @@ function ValidateLogin($Username, $Password)
     }
 }
 
+function RegisterDoctor($Username, $Password, $Name, $Email, $Phone, $Gender, $DOB, $BloodGroup, $Degree, $Specialization, $Workplace, $VisitingHour)
+{
+    $con = getConnection();
+    //insert into doctor table
+}
+
 
 
 
