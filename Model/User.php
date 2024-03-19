@@ -5,7 +5,7 @@ require_once 'Db.php';
 function ValidateLogin($Username, $Password)
 {
     $con = getConnection();
-    // here I want to check admin, doctor, patient, lab assistant login
+    
     $adminLogin = "SELECT * FROM admin WHERE Username = '$Username' AND Password = '$Password'";
     $doctorLogin = "SELECT * FROM doctor WHERE Username = '$Username' AND Password = '$Password'";
     $patientLogin = "SELECT * FROM patient WHERE Username = '$Username' AND Password = '$Password'";
@@ -19,20 +19,25 @@ function ValidateLogin($Username, $Password)
     if ($adminResult->num_rows > 0) 
     {
         return "admin";
-    } elseif ($doctorResult->num_rows > 0) 
+    } 
+    elseif ($doctorResult->num_rows > 0) 
     {
         return "doctor";
-    } elseif ($patientResult->num_rows > 0) 
+    } 
+    elseif ($patientResult->num_rows > 0) 
     {
         return "patient";
-    } elseif ($labAssistantResult->num_rows > 0) 
+    } 
+    elseif ($labAssistantResult->num_rows > 0) 
     {
         return "labAssistant";
-    } else 
+    } 
+    else 
     {
         return false;
     }
 }
+
 
 
 

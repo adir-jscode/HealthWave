@@ -1,7 +1,7 @@
 <?php 
-session_start();
-
+session_start(); 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,11 +11,26 @@ session_start();
     <title>Login</title>
 </head>
 <body>
-    <!-- login form html -->
-    <form action="../../Controllers/Login.php" method="post" novalidate>
-        <input type="text" name="username" placeholder="Username" >
-        <input type="password" name="password" placeholder="Password">
-        <input type="submit" value="Login">
-    </form>
+    <table width="100%" height="100%">
+        <tr>
+            <td align="center" valign="middle">
+                <form action="../../Controllers/Login.php" method="post">
+                    <fieldset style="width: 300px;">
+                        <legend>Login</legend>
+                        <label for="username">Username:</label><br>
+                        <input type="text" id="username" name="username" ><br><br>
+                        <?php echo isset($_SESSION['usernameErrorMsg']) ? $_SESSION['usernameErrorMsg'] : ""; ?> <br>
+                        <label for="password">Password:</label><br>
+                        <input type="password" id="password" name="password" ><br><br>
+                        <?php echo isset($_SESSION['passwordErrorMsg']) ? $_SESSION['passwordErrorMsg'] : ""; ?> <br>
+                        <input type="submit" value="Login"> <br>
+                        
+                        <?php echo isset($_SESSION['Error']) ? $_SESSION['Error'] : ""; ?>
+                        
+                    </fieldset>
+                </form>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

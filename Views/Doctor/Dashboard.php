@@ -1,8 +1,7 @@
 <?php 
 session_start();
-require_once '../../Model/User.php';
 
-if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true){
+if(isset($_SESSION['isDoctor']) && $_SESSION['isDoctor'] == true){
     
 }
 else{
@@ -23,17 +22,5 @@ else{
 </head>
 <body>
     <h1>Welcome to Dashboard, <?php echo $_SESSION['username'] ?> </h1>
-
-    <?php 
-    
-    if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true){
-        
-        echo '<a href="../../Controllers/Logout.php">Logout</a>';
-        
-    }else{
-        echo '<a href="Login.php">Login</a>';
-    }
-    
-    ?>
 </body>
 </html>

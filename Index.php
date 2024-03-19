@@ -22,7 +22,7 @@ include 'Views/Home/Nav.php';
     <title>HealthWave || Home </title>
 </head>
 <body>
-    <h1>Hello from HealthWave, Welcome ,<?php echo $_SESSION['username']; ?></h1>
+    <h1>Hello from HealthWave, Welcome ,</h1>
     
     <?php 
     
