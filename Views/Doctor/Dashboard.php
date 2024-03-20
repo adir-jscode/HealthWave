@@ -32,6 +32,7 @@ else{
         //change password
 
         echo '<a href="Profile.php">Profile</a> <br>';
+        echo '<a href="Appointment.php">Appointment History</a> <br>';
         echo '<a href="ChangePassword.php">Change Password</a> <br>';
         echo '<a href="../../Controllers/Logout.php">Logout</a> <br>';
         

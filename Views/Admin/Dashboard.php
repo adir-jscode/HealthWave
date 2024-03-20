@@ -2,7 +2,8 @@
 session_start();
 require_once '../../Model/User.php';
 
-if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true){
+if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true)
+{
     
 }
 else{
