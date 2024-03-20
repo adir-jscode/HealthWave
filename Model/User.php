@@ -38,10 +38,19 @@ function ValidateLogin($Username, $Password)
     }
 }
 
-function RegisterDoctor($Username, $Password, $Name, $Email, $Phone, $Gender, $DOB, $BloodGroup, $Degree, $Specialization, $Workplace, $VisitingHour)
+function RegisterDoctor($FullName,$Gender,$ContactNo,$Email,$Password,$Username,$Address,$Speciality,$Status)
 {
     $con = getConnection();
     //insert into doctor table
+    $sql = "INSERT INTO doctor (FullName,Gender,ContactNo,Email,Password,Username,Address,Speciality,Status) VALUES ('$FullName','$Gender','$ContactNo','$Email','$Password','$Username','$Address','$Speciality','$Status')";
+    if ($con->query($sql) === TRUE) 
+    {
+        return true;
+    } 
+    else 
+    {
+        return false;
+    }
 }
 
 
