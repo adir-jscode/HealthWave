@@ -130,6 +130,27 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
         {
         $status = 1;
         
+        //verify username and email already exists
+        $isUsernameExists = VerifyUsername($username);
+        if ($isUsernameExists) {
+            $_SESSION['usernameExistsMsg'] = "Username already exists!";
+            header('Location: ../Views/Admin/OnBoardDoctor.php'); 
+            exit();
+        }
+        else
+        {
+            $_SESSION['usernameExistsMsg'] = "";
+        }
+        $isEmailExists = VerifyEmail($email);
+        if ($isEmailExists) {
+            $_SESSION['emailExistsMsg'] = "Email already exists!";
+            header('Location: ../Views/Admin/OnBoardDoctor.php'); 
+            exit();
+        }
+        else
+        {
+            $_SESSION['emailExistsMsg'] = "";
+        }
         
         $registrationStatus = RegisterDoctor($fullName, $gender, $contactNo, $email, $password, $username, $address, $speciality, $status);
         

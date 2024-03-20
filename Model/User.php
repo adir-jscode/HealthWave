@@ -40,6 +40,38 @@ function ValidateLogin($Username, $Password)
     }
 }
 
+//verify username & email already exists
+function VerifyUsername($Username)
+{
+    $con = getConnection();
+    $sql = "SELECT * FROM doctor WHERE Username = '$Username'";
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) 
+    {
+        return true;
+    } 
+    else 
+    {
+        return false;
+    }
+}
+
+function VerifyEmail($Email)
+{
+    $con = getConnection();
+    $sql = "SELECT * FROM doctor WHERE Email = '$Email'";
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) 
+    {
+        return true;
+    } 
+    else 
+    {
+        return false;
+    }
+}
+
+
 function RegisterDoctor($FullName,$Gender,$ContactNo,$Email,$Password,$Username,$Address,$Speciality,$Status)
 {
     $con = getConnection();
