@@ -30,7 +30,10 @@ if ($profileData !== false) {
             <input type="hidden" id="username" name="username" value="<?php echo $username; ?>">
             <label for="fullName">Full Name:</label><br>
             <input type="text" id="fullName" name="fullName" value="<?php echo $profile['FullName']; ?>"><br><br>
-            
+            <!-- username field -->
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" value="<?php echo $profile['Username']; ?>" ><br><br>
+
             <label for="gender">Gender:</label><br>
             <select id="gender" name="gender">
                 <option value="male" <?php if ($profile['Gender'] === 'male') echo 'selected'; ?>>Male</option>

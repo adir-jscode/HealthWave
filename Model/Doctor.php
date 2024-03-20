@@ -29,6 +29,32 @@ function UpdateDoctorProfile($username, $fullName, $gender, $contactNo, $email, 
     }
 }
 
+//verify current password
+function VerifyPassword($username, $password) {
+    $con = getConnection();
+    $sql = "SELECT * FROM doctor WHERE Username = '$username' AND Password = '$password'";
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+function ChangePassword($username, $newPassword) {
+    $con = getConnection();
+    
+    $sql = "UPDATE doctor SET Password = '$newPassword' WHERE Username = '$username'";
+    if ($con->query($sql) === TRUE) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
 
 
 
