@@ -29,6 +29,8 @@ session_start();
                         
                     </fieldset>
                 </form>
+                <!-- Forget Password -->
+                <a href="ForgetPassword.php">Forget Password</a>
             </td>
         </tr>
     </table>

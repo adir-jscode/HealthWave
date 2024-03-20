@@ -2,16 +2,19 @@
 session_start();
 require_once '../Model/User.php';
 
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
+if ($_SERVER['REQUEST_METHOD'] === "POST") 
+{
     
-    if(isset($_POST['fullName']) && isset($_POST['gender']) && isset($_POST['contactNo']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['username']) && isset($_POST['address']) && isset($_POST['speciality'])) {
+    if(isset($_POST['fullName']) && isset($_POST['gender']) && isset($_POST['contactNo']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['username']) && isset($_POST['address']) && isset($_POST['speciality'])) 
+    {
         $isInvalid = true;
-        // Retrieve data from the form
+        
         $fullName = $_POST['fullName'];
         $gender = $_POST['gender'];
         $contactNo = $_POST['contactNo'];
         $email = $_POST['email'];
         $password = $_POST['password'];
+        $confirmPassword = $_POST['confirmPassword'];
         $username = $_POST['username'];
         $address = $_POST['address'];
         $speciality = $_POST['speciality'];
@@ -65,6 +68,28 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $_SESSION['password']= $password;
             $_SESSION['passwordErrorMsg']="";
         }
+        if(empty($confirmPassword))
+        {
+            $_SESSION['confirmPasswordErrorMsg']="Confirm password is required";
+            $isInvalid = false;
+        }
+        else
+        {
+            $_SESSION['confirmPassword']= $confirmPassword;
+            $_SESSION['confirmPasswordErrorMsg']="";
+        }
+
+        //password and confirm password match
+        if($password != $confirmPassword)
+        {
+            $_SESSION['confirmPasswordErrorMsg']="Password and confirm password do not match";
+            $isInvalid = false;
+        }
+        // else
+        // {
+        //     $_SESSION['confirmPassword']= $confirmPassword;
+        //     $_SESSION['confirmPasswordErrorMsg']="";
+        // }
         if(empty($username))
         {
             $_SESSION['usernameErrorMsg']="Username is required";
@@ -95,7 +120,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $_SESSION['speciality']= $speciality;
             $_SESSION['specialityErrorMsg']="";
         }
-      
+
+        if(!$isInvalid)
+        {
+            header('Location: ../Views/Admin/OnBoardDoctor.php'); 
+            exit();
+        }
+        else
+        {
         $status = 1;
         
         
@@ -104,23 +136,24 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         
         if($registrationStatus) {
             $_SESSION['successMessage'] = "Doctor registration successful!";
-            header('Location: ../Views/Admin/Dashboard.php');
+            
+            header('Location: ../Views/Admin/OnBoardDoctor.php');
             exit();
         } 
         else {
+            
             $_SESSION['errorMessage'] = "Doctor registration failed!";
             header('Location: ../Views/Admin/OnBoardDoctor.php'); 
             exit();
         }
     } 
-    else {
-        $_SESSION['errorMessage'] = "All fields are required!";
-        header('Location: ../Views/Home/RegisterDoctor.php'); 
-        exit();
-    }
-} else {
+    
+}     
+} 
+else 
+{
     $_SESSION['errorMessage'] = "Invalid Request!";
-    header('Location: ../Views/Home/RegisterDoctor.php'); 
+    header('Location: ../Views/Admin/OnBoardDoctor.php'); 
     exit();
 }
 ?>

@@ -28,9 +28,14 @@ else{
     
     if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true){
         
-        echo '<a href="../../Controllers/Logout.php">Logout</a>';
         
-    }else{
+        
+        echo '<a href="OnBoardDoctor.php">Onboard Doctor</a> <br>';
+        echo '<a href="../../Controllers/Logout.php">Logout</a> <br>';
+        
+        
+    }
+    else{
         echo '<a href="Login.php">Login</a>';
     }
     

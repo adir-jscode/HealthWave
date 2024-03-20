@@ -18,9 +18,26 @@ else{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Dashboard</title>
+    <title>Doctor - Dashboard</title>
 </head>
 <body>
-    <h1>Welcome to Dashboard, <?php echo $_SESSION['username'] ?> </h1>
+    <h1>Welcome to Doctor Dashboard, <?php echo $_SESSION['username'] ?> </h1>
+    <?php 
+    
+    if(isset($_SESSION['isDoctor']) && $_SESSION['isDoctor'] == true){
+        
+        
+        
+        //profile
+        echo '<a href="Profile.php">Profile</a> <br>';
+        echo '<a href="../../Controllers/Logout.php">Logout</a> <br>';
+        
+        
+    }
+    else{
+        echo '<a href="Login.php">Login</a>';
+    }
+    
+    ?>
 </body>
 </html>
