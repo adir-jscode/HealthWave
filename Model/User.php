@@ -23,15 +23,17 @@ function ValidateLogin($Username, $Password)
     elseif ($doctorResult->num_rows > 0) 
     {
         return "doctor";
-    } 
-    elseif ($patientResult->num_rows > 0) 
-    {
-        return "patient";
-    } 
-    elseif ($labAssistantResult->num_rows > 0) 
-    {
-        return "labAssistant";
-    } 
+    }
+    
+    // elseif ($patientResult->num_rows > 0) 
+    // {
+        
+    //     return "patient";
+    // } 
+    // elseif ($labAssistantResult->num_rows > 0) 
+    // {
+    //     return "labAssistant";
+    // } 
     else 
     {
         return false;

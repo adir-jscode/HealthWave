@@ -2,7 +2,8 @@
 session_start();
 require_once '../Model/User.php';
 
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
+if ($_SERVER['REQUEST_METHOD'] === "POST") 
+{
 
     if(isset($_POST['username']) && isset($_POST['password']))
     {
@@ -32,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         if($isValid)
         {
             $userType = ValidateLogin($username, $password);
+            
             if ($userType !== false) 
             {
                 $_SESSION['username'] = $username;
@@ -44,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 elseif ($userType == 'doctor') {
                     $_SESSION['isDoctor'] = true;
                     setcookie('username', $username, time() + (86400 * 30), "/");
-                    header('Location: ../Views/Doctor/DoctorHome.php');
+                    header('Location: ../Views/Doctor/Dashboard.php');
                 } 
                 elseif ($userType == 'patient') {
                     $_SESSION['isPatient'] = true;
@@ -56,23 +58,26 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     setcookie('username', $username, time() + (86400 * 30), "/");
                     header('Location: ../Views/LabAssistant/LabAssistantHome.php');
                 } 
-                else {
-                    header('Location: ../Views/Home/Login.php');
-                }
-            } 
-            else {
+                
+            }
+            else 
+                {
                 $_SESSION['Error'] = "Invalid Username or Password";
                 header('Location: ../Views/Home/Login.php');
-            }
+                }
+            
         }
         else
         {
+           
             header('Location: ../Views/Home/Login.php');
         }
     
     }
-    else{
+    
+}
+else
+    {
         echo "Invalid Request";
     }
-}
 ?>
