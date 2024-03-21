@@ -136,6 +136,15 @@ function addMedicine($category, $code, $medicineName, $manufacture, $unit, $desc
     }
 }
 
+//getMedicineInventory
+function getMedicineInventory()
+{
+    $con = getConnection();
+    $sql = "SELECT * FROM medicineinventory";
+    $result = $con->query($sql);
+    return $result;
+}
+
 
 
 

@@ -1,5 +1,6 @@
 <?php 
 session_start();
+require_once '../../Model/User.php';
 if(!isset($_SESSION['isAdmin'])){
     header('Location: ../../Views/Home/Login.php');
 }
@@ -83,9 +84,62 @@ if(!isset($_SESSION['isAdmin'])){
         <input type="submit" value="Add Medicine">
     </form>
     
-    <!-- Update and Delete Medicine Options -->
-    <h2>Update and Delete Medicine</h2>
+    <h2>All Medicine List</h2>
     <!-- Display Medicine Inventory Table with options to update and delete -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Medicine Name</th>
+                <th>Manufacture</th>
+                <th>Unit</th>
+                <th>Description</th>
+                <th>Unit Price</th>
+                <th>Sell Price</th>
+                <th>Quantity</th>
+                <th>SKU</th>
+                <th>Expiry Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+            
+            // Fetch all appointments
+            $appointments = getMedicineInventory();
+            if ($appointments !== false) :
+                while ($row = $appointments->fetch_assoc()) :
+            
+            ?>
+            <tr>
+                <td><?php echo $row['Id']; ?></td>
+                <td><?php echo $row['Category']; ?></td>
+                <td><?php echo $row['MedicineName']; ?></td>
+                <td><?php echo $row['Manufacture']; ?></td>
+                <td><?php echo $row['Unit']; ?></td>
+                <td><?php echo $row['Description']; ?></td>
+                <td><?php echo $row['UnitPrice']; ?></td>
+                <td><?php echo $row['SellPrice']; ?></td>
+                <td><?php echo $row['Quantity']; ?></td>
+                <td><?php echo $row['Sku']; ?></td>
+                <td><?php echo $row['ExpiryDate']; ?></td>
+                <td>
+                    <a href='update_medicine.php?id=<?php echo $row['Id']; ?>'>Update</a> | 
+                    <a href='delete_medicine.php?id=<?php echo $row['Id']; ?>'>Delete</a>
+                </td>
+            </tr>
+            <?php
+                endwhile;
+            else :
+            ?>
+            <tr>
+                <td colspan="8">Not found.</td>
+            </tr>
+            <?php endif; ?>
+            
+        </tbody>
+    </table>
     
 </body>
 </html>
