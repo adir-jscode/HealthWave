@@ -32,6 +32,7 @@ else{
         
         
         echo '<a href="OnBoardDoctor.php">Onboard Doctor</a> <br>';
+        echo '<a href="MedicineInventory.php">Medicine Inventory</a> <br>';
         echo '<a href="../../Controllers/Logout.php">Logout</a> <br>';
         
         

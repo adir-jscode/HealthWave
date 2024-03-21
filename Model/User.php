@@ -124,6 +124,19 @@ function ForgetPassword($Username, $Password)
     }
 }
 
+function addMedicine($category, $code, $medicineName, $manufacture, $unit, $description, $unitPrice, $sellPrice, $quantity, $sku, $expiryDate)
+{
+    $con = getConnection();
+    $sql = "INSERT INTO medicineinventory (Category, Code, MedicineName, Manufacture, Unit, Description, UnitPrice, SellPrice, Quantity, SKU, ExpiryDate) VALUES ('$category', '$code', '$medicineName', '$manufacture', '$unit', '$description', '$unitPrice', '$sellPrice', '$quantity', '$sku', '$expiryDate')";
+
+    if ($con->query($sql) === TRUE) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 
 
 

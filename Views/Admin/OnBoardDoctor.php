@@ -54,7 +54,6 @@ session_start();
             <textarea id="address" name="address" rows="4" cols="50" ></textarea><br><br>
             <?php echo isset($_SESSION['addressErrorMsg']) ? $_SESSION['addressErrorMsg'] : ""; ?> <br>
 
-            
             <label for="speciality">Speciality:</label><br>
             <input type="text" id="speciality" name="speciality"><br><br>
             <?php echo isset($_SESSION['specialityErrorMsg']) ? $_SESSION['specialityErrorMsg'] : ""; ?> <br>
