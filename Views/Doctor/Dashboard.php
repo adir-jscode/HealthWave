@@ -24,7 +24,8 @@ else{
     <h1>Welcome to Doctor Dashboard, <?php echo $_SESSION['username'] ?> </h1>
     <?php 
     
-    if(isset($_SESSION['isDoctor']) && $_SESSION['isDoctor'] == true){
+    if(isset($_SESSION['isDoctor']) && $_SESSION['isDoctor'] == true)
+    {
         
         
         
@@ -32,13 +33,14 @@ else{
         //change password
 
         echo '<a href="Profile.php">Profile</a> <br>';
-        echo '<a href="Appointment.php">Appointment History</a> <br>';
+        echo '<a href="BookAppointment.php">Appointment History</a> <br>';
         echo '<a href="ChangePassword.php">Change Password</a> <br>';
         echo '<a href="../../Controllers/Logout.php">Logout</a> <br>';
         
         
     }
-    else{
+    else
+    {
         echo '<a href="Login.php">Login</a>';
     }
     

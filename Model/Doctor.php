@@ -53,6 +53,32 @@ function ChangePassword($username, $newPassword) {
     }
 }
 
+//change appointment status
+function ChangeAppointmentStatus($appointmentId) 
+{
+    $con = getConnection();
+    
+    $sql = "UPDATE appointment SET Status = '1' WHERE Id = '$appointmentId'";
+    if ($con->query($sql) === TRUE) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//delete appointment
+function DeleteAppointment($appointmentId) 
+{
+    $con = getConnection();
+    
+    $sql = "DELETE FROM appointment WHERE Id = '$appointmentId'";
+    if ($con->query($sql) === TRUE) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 
 
