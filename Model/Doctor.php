@@ -79,6 +79,22 @@ function DeleteAppointment($appointmentId)
     }
 }
 
+//add patient record
+function AddPatientRecord($firstName, $lastName, $email, $password, $maritalStatus, $gender, $dateOfBirth, $spouseName, $bloodGroup, $fatherName, $motherName, $contactNo, $username) 
+{
+    $con = getConnection();
+    
+    $sql = "INSERT INTO patient (FirstName, LastName, Email, Password, MaritalStatus,Gender, DateOfBirth, SpouseName, BloodGroup, FatherName, MotherName, Status, ContactNo, Username) 
+            VALUES ('$firstName', '$lastName', '$email', '$password', '$maritalStatus', '$gender', '$dateOfBirth', '$spouseName', '$bloodGroup', '$fatherName', '$motherName', '1', '$contactNo', '$username')";
+
+    if ($con->query($sql) === TRUE) {
+        return true;
+    } else {
+        return false;
+    }
+    
+}
+
 
 
 
