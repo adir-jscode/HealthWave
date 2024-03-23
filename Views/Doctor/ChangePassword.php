@@ -23,7 +23,6 @@
         <input type="password" id="confirmPassword" name="confirmPassword"><br><br>
         
         <input type="submit" value="Change Password">
-        <!-- show error message -->
         <?php echo isset($_SESSION['errorMessage']) ? $_SESSION['errorMessage'] : ""; ?>
     </form>
 </body>

@@ -26,12 +26,6 @@ else{
     
     if(isset($_SESSION['isDoctor']) && $_SESSION['isDoctor'] == true)
     {
-        
-        
-        
-        //profile
-        //change password
-
         echo '<a href="Profile.php">Profile</a> <br>';
         echo '<a href="BookAppointment.php">Appointment History</a> <br>';
         echo '<a href="ChangePassword.php">Change Password</a> <br>';
