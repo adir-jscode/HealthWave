@@ -26,6 +26,10 @@ session_start();
                         <input type="submit" value="Login"> <br>
                         
                         <?php echo isset($_SESSION['Error']) ? $_SESSION['Error'] : ""; ?>
+                        <!-- register -->
+
+                        <span>Don't have an account?</span> 
+                        <a href="Registration.php">Register</a>
                         
                     </fieldset>
                 </form>

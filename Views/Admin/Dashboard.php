@@ -30,7 +30,9 @@ else{
     if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true){
         
         
-        
+        echo '<a href="User.php">Application User</a> <br>';
+        echo '<a href="Profile.php">Profile</a> <br>';
+        echo '<a href="ChangePassword.php">Change Password</a> <br>';
         echo '<a href="OnBoardDoctor.php">Onboard Doctor</a> <br>';
         echo '<a href="MedicineInventory.php">Medicine Inventory</a> <br>';
         echo '<a href="../../Controllers/Logout.php">Logout</a> <br>';

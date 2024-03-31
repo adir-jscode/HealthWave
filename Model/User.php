@@ -18,6 +18,9 @@ function ValidateLogin($Username, $Password)
 
     if ($adminResult->num_rows > 0) 
     {
+        
+        $row = $adminResult->fetch_assoc();
+        $_SESSION['Id'] = $row['Id'];
         return "admin";
     } 
     elseif ($doctorResult->num_rows > 0) 
@@ -122,6 +125,52 @@ function ForgetPassword($Username, $Password)
     } else {
         return false;
     }
+}
+
+
+function ChangePassword($Id, $Password)
+{
+    $con = getConnection();
+    $stmt = $con->prepare("UPDATE admin SET Password = ? WHERE Id = ?");
+    $stmt->bind_param("si", $Password, $Id);
+    $stmt->execute();
+    return $stmt->affected_rows;
+}
+
+
+function getUsers(){
+    $con = getConnection();
+    $stmt = $con->prepare("SELECT * FROM admin");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $users = $result->fetch_all(MYSQLI_ASSOC);
+    return $users;
+}
+
+function getUser($id){
+    $con = getConnection();
+    $stmt = $con->prepare("SELECT * FROM admin WHERE Id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    return $user;
+}
+
+function updateUser($id, $username, $password, $status){
+    $con = getConnection();
+    $stmt = $con->prepare("UPDATE admin SET Username = ?, Password = ?, Status = ? WHERE Id = ?");
+    $stmt->bind_param("ssii", $username, $password, $status, $id);
+    $stmt->execute();
+    return $stmt->affected_rows;
+}
+
+function deleteUser($id){
+    $con = getConnection();
+    $stmt = $con->prepare("DELETE FROM admin WHERE Id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    return $stmt->affected_rows;
 }
 
 function addMedicine($category, $code, $medicineName, $manufacture, $unit, $description, $unitPrice, $sellPrice, $quantity, $sku, $expiryDate)
