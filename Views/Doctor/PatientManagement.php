@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Patient Registration</h1>
-    <form action="register_patient.php" method="POST" novalidate>
+    <form action="../../Controllers/AddPatient.php" method="POST" novalidate>
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" name="firstName" required><br><br>
 
