@@ -10,47 +10,83 @@ require_once '../../Model/Doctor.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prescription Management</title>
     <style>
-        body {
+           body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
         }
 
-        h2, h3 {
-            margin-bottom: 10px;
+        h2 {
+            text-align: center;
+            margin-top: 30px;
         }
 
-        form {
-            margin-bottom: 20px;
+        .card {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         label {
-            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
         }
 
         input[type="text"],
         input[type="date"],
-        input[type="time"],
         textarea {
-            width: 100%;
+            width: calc(100% - 16px); /* Adjusted for padding */
             padding: 8px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
         }
-
         input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    background-color: #7FFFD4;
+            color: black;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 25px;
+    box-sizing: border-box;
+}
 
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
+input[type="submit"]:hover {
+    background-color: #7FFF00;
+}
+        .back {
+    background-color: #7FFFD4;
+            color: black;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 60%;
+    text-align: center;
+    text-decoration: none;
+    margin: 25px auto;
+    box-sizing: border-box;
+    justify-content:center;
+}
+
+.back:hover {
+    background-color: #7FFF00;
+}
 
         table {
             width: 100%;
@@ -79,30 +115,48 @@ require_once '../../Model/Doctor.php';
         .status-inactive {
             color: red;
         }
+        button{
+    background-color: #7FFFD4;
+            color: black;
+            border:none;
+}
+button:hover{
+    background-color: #7FFF00;
+}
+ a{
+    text-decoration:none;
+    color: black;
+    
+}
     </style>
 </head>
 <body>
-    <h2>Prescription Management</h2>
+<h2>Prescription Management</h2>
+    <div class="card">
+        <h3>Add New Prescription</h3>
+        <form action="../../Controllers/BookPrescription.php" method="POST" onsubmit="return validateForm()">
+            <label for="patientName">Patient Name:</label><br>
+            <input type="text" id="patientName" name="patientName"><br>
 
-    <!-- Form to add new prescription -->
-    <h3>Add New Prescription</h3>
-    <form action="../../Controllers/BookPrescription.php" method="POST" onsubmit="return validateForm()">
-        <!-- patient name -->
-        <label for="patientName">Patient Name:</label><br>
-        <input type="text" id="patientName" name="patientName"><br>
+            <label for="dateIssued">Date Issued:</label><br>
+            <input type="date" id="dateIssued" name="dateIssued"><br>
 
-        
+            <label for="prescriptionText">Prescription Text:</label><br>
+            <textarea id="prescriptionText" name="prescriptionText" rows="4" cols="50"></textarea><br>
 
-        <label for="dateIssued">Date Issued:</label><br>
-        <input type="date" id="dateIssued" name="dateIssued"><br>
-
-        <label for="prescriptionText">Prescription Text:</label><br>
-        <textarea id="prescriptionText" name="prescriptionText" rows="4" cols="50"></textarea><br>
-
-        <input type="submit" value="Add Prescription">
-        
-        <?php echo isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : ""; ?> <br>
-    </form>
+            <input type="submit" value="Add Prescription"><br>
+            <?php  
+    if(isset($_SESSION['successMessage'])) {
+        echo '<span class="success-message">' . $_SESSION['successMessage'] . '</span>';
+        unset($_SESSION['successMessage']);
+    } else if (isset($_SESSION['errorMessage'])) {
+        echo '<span class="error-message">' . $_SESSION['errorMessage'] . '</span>';
+        unset($_SESSION['errorMessage']);
+    }
+?> <br>
+        </form>
+        <a class="back" href="Dashboard.php">Go back</a>
+    </div>
 
     <!-- Table to display all prescriptions -->
     <h3>All Prescriptions</h3>

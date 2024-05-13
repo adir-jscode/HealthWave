@@ -19,97 +19,179 @@ else{
     <title>Appointment Booking</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
 
-        h2, h3 {
-            margin-bottom: 10px;
-        }
+.card {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
 
-        form {
-            margin-bottom: 20px;
-        }
+.card h3 {
+    margin-bottom: 20px;
+}
 
-        label {
-            font-weight: bold;
-        }
+.form-group {
+    margin-bottom: 15px;
+}
 
-        input[type="text"],
-        input[type="date"],
-        input[type="time"],
-        textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+label {
+    font-weight: bold;
+}
 
-        input[type="submit"],
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin-right: 10px;
-        }
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
 
-        input[type="submit"]:hover,
-        button:hover {
-            background-color: #45a049;
-        }
+input[type="submit"] {
+    background-color: #7FFFD4;
+            color: black;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 25px;
+    box-sizing: border-box;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
+input[type="submit"]:hover {
+    background-color: #7FFF00;
+}
+.back {
+    background-color: #7FFFD4;
+            color: black;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 60%;
+    text-align: center;
+    text-decoration: none;
+    margin: 25px auto;
+    box-sizing: border-box;
+    justify-content:center;
+}
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
+.back:hover {
+    background-color: #7FFF00;
+}
 
-        th {
-            background-color: #f2f2f2;
-        }
+.error-message {
+    color: red;
+    margin-top: 5px;
+   
+}
+
+.success-message {
+    color: green;
+    margin-top: 5px;
+   
+}
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+
+button{
+    background-color: #7FFFD4;
+            color: black;
+            border:none;
+}
+button:hover{
+    background-color: #7FFF00;
+}
+ a{
+    text-decoration:none;
+    color: black;
+    
+}
     </style>
 </head>
 <body>
-    <h2>Appointment Booking</h2>
-
-    <!-- Form to add new appointment -->
+<div class="card">
     <h3>Add New Appointment</h3>
-    <form action="../../Controllers/BookAppointment.php" method="POST" onclick=" return validateForm()">
-        <!-- patient name -->
-        <label for="patientName">Patient Name:</label><br>
-        <input type="text" id="patientName" name="patientName" ><br><br>
+    <form action="../../Controllers/BookAppointment.php" method="POST" onclick="return validateForm()">
+        <div class="form-group">
+            <label for="patientName">Patient Name:</label><br>
+            <input type="text" id="patientName" name="patientName"><br><br>
+        </div>
 
-        <label for="contactNo">Contact Number:</label><br>
-        <input type="text" id="contactNo" name="contactNo" ><br><br>
+        <div class="form-group">
+            <label for="contactNo">Contact Number:</label><br>
+            <input type="text" id="contactNo" name="contactNo"><br><br>
+        </div>
 
-        <label for="date">Date:</label><br>
-        <input type="date" id="date" name="date" ><br><br>
+        <div class="form-group">
+            <label for="date">Date:</label><br>
+            <input type="date" id="date" name="date"><br><br>
+        </div>
 
-        <label for="time">Time:</label><br>
-        <input type="time" id="time" name="time"><br><br>
+        <div class="form-group">
+            <label for="time">Time:</label><br>
+            <input type="time" id="time" name="time"><br><br>
+        </div>
 
-        <label for="reason">Reason for Appointment:</label><br>
-        <textarea id="reason" name="reason" rows="4" cols="50" ></textarea><br><br>
+        <div class="form-group">
+            <label for="reason">Reason for Appointment:</label><br>
+            <textarea id="reason" name="reason" rows="4" cols="50"></textarea><br><br>
+        </div>
 
-        <input type="submit" value="Book Appointment">
-        
-        <?php echo isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : ""; ?> <br>
-        <span id="error"></span>
+        <input type="submit" value="Book Appointment"><br>
+       
+        <br>
+        <?php  
+    if(isset($_SESSION['successMessage'])) {
+        echo '<span class="success-message">' . $_SESSION['successMessage'] . '</span>';
+        unset($_SESSION['successMessage']);
+    } else if (isset($_SESSION['errorMessage'])) {
+        echo '<span class="error-message">' . $_SESSION['errorMessage'] . '</span>';
+        unset($_SESSION['errorMessage']);
+    }
+?>
+<br>
+<span id="error"></span>
 
     </form>
+  <a class="back" href="Dashboard.php">Go back</a>
+</div>
+
 
     <!-- Table to display all appointments -->
     <h3>All Appointments</h3>

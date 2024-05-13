@@ -102,12 +102,4 @@ function ForgetPassword($Username, $Password)
 }
 
 
-
-
-
-
-
-
-
-
 ?>

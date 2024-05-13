@@ -18,64 +18,78 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor - Dashboard</title>
     <style>
+        <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #008B8B;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
             text-align: center;
-            margin-top: 50px;
+            margin-bottom: 20px;
         }
 
         .dashboard-links {
-            max-width: 600px;
-            margin: 50px auto;
-            background-color: #fff;
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            list-style-type: none;
+            padding: 0;
         }
 
-        .dashboard-links a {
-            display: block;
+        .dashboard-links li {
             margin-bottom: 10px;
+        }
+
+        .dashboard-links li a {
+            display: block;
             padding: 10px;
-            background-color: #f0f0f0;
-            border-radius: 3px;
+            background-color: #7FFFD4;
+            color: black;
             text-decoration: none;
-            color: #333;
+            border-radius: 4px;
             transition: background-color 0.3s ease;
         }
 
-        .dashboard-links a:hover {
-            background-color: #e0e0e0;
+        .dashboard-links li a:hover {
+            background-color: #7FFF00;
         }
+        
+        
+    </style>
     </style>
 </head>
 <body>
+    <div class="container">
     <h1>Welcome to Doctor Dashboard, <?php echo $_SESSION['username'] ?> </h1>
     <div class="dashboard-links">
         <?php 
         if(isset($_SESSION['isDoctor']) && $_SESSION['isDoctor'] == true)
         {
-            echo '<a href="Profile.php">Profile</a>';
-            echo '<a href="BookAppointment.php">Appointments</a>';
-            echo '<a href="PatientManagement.php">Patients</a>';
-            echo '<a href="Prescription.php">Prescriptions</a>';
-            echo '<a href="LabTest.php">Lab Test</a>';
-            echo '<a href="SupportTickets.php">Support Tickets</a>';
-            echo '<a href="FeedBack.php">Feedback</a>';
-            echo '<a href="ChangePassword.php">Change Password</a>';
-            echo '<a href="../../Controllers/Logout.php">Logout</a>';
+            echo '<li><a href="Profile.php">Profile</a></li>';
+            echo '<li><a href="BookAppointment.php">Appointments</a></li>';
+            echo '<li><a href="PatientManagement.php">Patients</a></li>';
+            echo '<li><a href="Prescription.php">Prescriptions</a></li>';
+            echo '<li><a href="LabTest.php">Lab Test</a></li>';
+            echo '<li><a href="SupportTickets.php">Support Tickets</a></li>';
+            echo '<li><a href="FeedBack.php">Feedback</a></li>';
+            echo '<li><a href="ChangePassword.php">Change Password</a></li>';
+            echo '<li><a href="../../Controllers/Logout.php">Logout</a></li>';
         }
         else
         {
             echo '<a href="Login.php">Login</a>';
         }
         ?>
+    </div>
     </div>
 </body>
 </html>

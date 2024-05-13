@@ -13,26 +13,35 @@ $labTests = ShowAllLabTests();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lab Tests</title>
     <style>
-        body {
+          body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
         }
 
-        h2, h3 {
-            margin-bottom: 10px;
+        h2 {
+            text-align: center;
+            margin-top: 30px;
         }
 
-        form {
-            margin-bottom: 20px;
+        .card {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         label {
-            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
         }
 
         input[type="text"],
         textarea {
-            width: 100%;
+            width: calc(100% - 16px); /* Adjusted for padding */
             padding: 8px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
@@ -40,23 +49,47 @@ $labTests = ShowAllLabTests();
             box-sizing: border-box;
         }
 
-        input[type="submit"],
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin-right: 10px;
-        }
+        input[type="submit"] {
+    background-color: #7FFFD4;
+            color: black;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 25px;
+    box-sizing: border-box;
+}
 
-        input[type="submit"]:hover,
-        button:hover {
-            background-color: #45a049;
-        }
+input[type="submit"]:hover {
+    background-color: #7FFF00;
+}
+        .back {
+    background-color: #7FFFD4;
+            color: black;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 60%;
+    text-align: center;
+    text-decoration: none;
+    margin: 25px auto;
+    box-sizing: border-box;
+    justify-content:center;
+}
+
+.back:hover {
+    background-color: #7FFF00;
+}
 
         table {
             width: 100%;
@@ -73,35 +106,51 @@ $labTests = ShowAllLabTests();
         th {
             background-color: #f2f2f2;
         }
+        button{
+    background-color: #7FFFD4;
+            color: black;
+            border:none;
+}
+button:hover{
+    background-color: #7FFF00;
+}
+ a{
+    text-decoration:none;
+    color: black;
+    
+}
     </style>
 </head>
 <body>
-    <h2>Lab Tests</h2>
+<h2>Lab Tests</h2>
+    <div class="card">
+        <h3>Add New Lab Test</h3>
+        <form action="../../Controllers/AddLabTest.php" method="POST" onsubmit="return validateForm()">
+            <label for="testName">Test Name:</label><br>
+            <input type="text" id="testName" name="testName"><br>
 
-    <!-- Form to add new lab test -->
-    <h3>Add New Lab Test</h3>
-    <form action="../../Controllers/AddLabTest.php" method="POST" onsubmit="return validateForm()">
-        <!-- Test name -->
-        <label for="testName">Test Name:</label><br>
-        <input type="text" id="testName" name="testName"><br>
+            <label for="patientName">Patient Name:</label><br>
+            <input type="text" id="patientName" name="patientName"><br>
 
-        <!-- Patient name -->
-        <label for="patientName">Patient Name:</label><br>
-        <input type="text" id="patientName" name="patientName"><br>
+            <label for="testDescription">Test Description:</label><br>
+            <textarea id="testDescription" name="testDescription" rows="4" cols="50"></textarea><br>
 
-        <!-- Test description -->
-        <label for="testDescription">Test Description:</label><br>
-        <textarea id="testDescription" name="testDescription" rows="4" cols="50"></textarea><br>
+            <label for="testCost">Test Cost:</label><br>
+            <input type="text" id="testCost" name="testCost"><br>
 
-        <!-- Test cost -->
-        <label for="testCost">Test Cost:</label><br>
-        <input type="text" id="testCost" name="testCost"><br>
-
-        <input type="submit" value="Add Lab Test">
-        
-        <?php echo isset($_SESSION['successMessage']) ? $_SESSION['successMessage'] : ""; ?> <br>
-
-    </form>
+            <input type="submit" value="Add Lab Test"> <br>
+            <?php  
+    if(isset($_SESSION['successMessage'])) {
+        echo '<span class="success-message">' . $_SESSION['successMessage'] . '</span>';
+        unset($_SESSION['successMessage']);
+    } else if (isset($_SESSION['errorMessage'])) {
+        echo '<span class="error-message">' . $_SESSION['errorMessage'] . '</span>';
+        unset($_SESSION['errorMessage']);
+    }
+?><br>
+        </form>
+        <a class="back" href="Dashboard.php">Go back</a>
+    </div>
 
     <!-- Table to display all lab tests -->
     <h3>All Lab Tests</h3>
@@ -128,7 +177,7 @@ $labTests = ShowAllLabTests();
                 <td><?php echo $row['TestDescription']; ?></td>
                 <td><?php echo $row['TestCost']; ?></td>
                 <td>
-                    <button><a href="../../Controllers/EditLabTest.php?id=<?php echo $row['Id']; ?>">Edit</a></button>
+                    
                     <button><a href="../../Controllers/DeleteLabTest.php?id=<?php echo $row['Id']; ?>">Delete</a></button>
                 </td>
             </tr>

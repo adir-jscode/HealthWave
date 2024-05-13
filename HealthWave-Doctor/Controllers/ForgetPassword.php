@@ -1,81 +1,48 @@
+
 <?php
 session_start();
 require_once '../Model/User.php';
+$con = getConnection();
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    
-    if (isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_POST['username'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $confirmPassword = $_POST['confirmPassword'];
-        
-        // Validate password
-        $isValid = true;
-        if (empty($username)) {
-            $_SESSION['usernameErrorMsg'] = "Username is required";
-            $isValid = false;
-        }
-        else
-        {
-            $_SESSION['username'] = $username;
-            $_SESSION['usernameErrorMsg'] = "";
-        }
+    $username = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirmPassword = $_POST['confirmPassword'] ?? '';
+    $isValid = true;
 
+    // Perform any necessary validation on username, password, and confirmPassword
 
-        if (empty($password)) {
-            $_SESSION['passwordErrorMsg'] = "Password is required";
-            $isValid = false;
-        }
-        if (empty($confirmPassword)) {
-            $_SESSION['confirmPasswordErrorMsg'] = "Confirm password is required";
-            $isValid = false;
-        }
-        if ($password !== $confirmPassword) {
-            $_SESSION['confirmPasswordErrorMsg'] = "Password and confirm password do not match";
-            $isValid = false;
-        }
-        else
-        {
-            $_SESSION['password'] = $password;
-            $_SESSION['passwordErrorMsg'] = "";
-            $_SESSION['confirmPassword'] = $confirmPassword;
-            $_SESSION['confirmPasswordErrorMsg'] = "";
-        }
-        
-        if ($isValid === true) 
-        {
-            //call the model function to reset password
-            
-            $isPasswordReset = ForgetPassword($username, $password);
-            if ($isPasswordReset === true) 
-            {
-            $_SESSION['successMessage'] = "Password reset successful!";
-            header('Location: ../Views/Home/Login.php');
-            } 
-            else 
-            {
-                $_SESSION['errorMessage'] = "Password reset unsuccessful!";
-                header('Location: ../Views/Home/ForgetPassword.php');
-            }
-        } 
-        else {
-            
+    if ($isValid) {
+        $stmt = $con->prepare("SELECT * FROM doctor WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 0) {
+            $_SESSION['usernameError'] = "User with this username doesn't exist";
             header('Location: ../Views/Home/ForgetPassword.php');
             exit();
         }
-    } 
-    else {
-        
-        $_SESSION['errorMessage'] = "Invalid Request!";
-        header('Location: ../Views/Home/ForgetPassword.php');
-        exit();
+
+        // User exists, proceed with password update
+        $stmt = $con->prepare("UPDATE doctor SET password = ? WHERE username = ?");
+        $stmt->bind_param("ss", $password, $username);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            // Password updated successfully
+            header('Location: ../Views/Home/Login.php');
+            exit();
+        } else {
+            // Error updating password
+            $_SESSION['passwordError'] = "Error updating password";
+            header('Location: ../Views/Home/ForgetPassword.php');
+            exit();
+        }
     }
-} 
-else 
-{
-    
-    $_SESSION['errorMessage'] = "Invalid Request!";
-    header('Location: forget_password.php');
+} else {
+    // Redirect to the forget password page if accessed directly
+    header('Location: ../Views/Home/ForgetPassword.php');
     exit();
 }
 ?>
