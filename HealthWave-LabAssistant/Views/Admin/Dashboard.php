@@ -1,7 +1,20 @@
 <?php 
 session_start();
+require_once '../../Model/User.php';
+
+if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true)
+{
+    
+}
+else{
+    header('Location: ../Home/Login.php');
+}
+
 
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,14 +74,14 @@ h1 {
 
 <body>
 <div class="container">
-        <h1>Welcome to HealthWave</h1>
+        <h1>Welcome to Dashboard, <?php echo $_SESSION['username'] ?></h1>
         <ul class="dashboard-links">
             
-            <li><a href="./HealthWave-Admin/Views/Home/Login.php">Admin</a></li>
-            <li><a href="./HealthWave-Doctor/Views/Home/Login.php">Doctor</a></li>
-            <li><a href="./HealthWave-patient/Views/Home/Login.php">Patient</a></li>
-            <li><a href="./HealthWave-LabAssistant/Views/Home/Login.php">Lab Assistant</a></li>
-            
+            <li><a href="Profile.php">Profile</a></li>
+            <li><a href="ChangePassword.php">Change Password</a></li>
+            <li><a href="OnBoardDoctor.php">Onboard Doctor</a></li>
+            <li><a href="MedicineInventory.php">Medicine Inventory</a></li>
+            <li><a href="../../Controllers/Logout.php">Logout</a></li>
         </ul>
     </div>
 </body>
